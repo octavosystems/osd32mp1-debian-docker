@@ -8,6 +8,9 @@ ENV PGID=${PGID:-1000}
 
 ENV ENTRYPOINT ${ENTRYPOINT:-/docker-entrypoint.sh}
 
+RUN printf "deb http://archive.debian.org/debian buster main contrib non-free\n" > /etc/apt/sources.list && \
+    printf "deb http://archive.debian.org/debian-security buster/updates main contrib non-free\n" >> /etc/apt/sources.list
+
 RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get -y -q \
 	upgrade \
 	udev \
